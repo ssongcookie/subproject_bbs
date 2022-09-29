@@ -24,11 +24,29 @@
 </head>
 <body>
 	<%
+		/* 로그인 된 유저 로그인페이지 접근제한  */
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			//userID 변수가 자신에게 할당된 세션 userID를 담을 수 있도록
+			userID = (String) session.getAttribute("userID");
+		}
+		if(userID != null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인이 되어있습니다.')");
+			script.println("location.href = 'main.jsp'");
+			script.println("</script>");
+		}
+	
 		/* 인스턴스 생성 */
 		UserDAO userDAO = new UserDAO();
 		/* 로그인 시도 */
 		int result = userDAO.login(user.getUserID(), user.getUserPassword());
 		if(result == 1){
+			
+			/* 로그인에 성공했을 때 세션부여 */
+			session.setAttribute("userID", user.getUserID());
+			
 			/* PrintWriter를 사용해 하나의 script 문장을 넣을 수 있도록 해 줌 */
 			PrintWriter script = response.getWriter();
 			/* script 문장을 유동적으로 실행 */
