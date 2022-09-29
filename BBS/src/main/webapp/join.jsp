@@ -42,9 +42,8 @@
 						aria-expanded="false">접속하기<span class="caret"></span> <!-- span태그에 아이콘 -->
 					</a>
 					<ul class="dropdown-menu">
-						<li class="active"><a href="login.jsp">로그인</a>
-						<!-- 현재 선택된 홈페이지를 의미 -->
-						<li><a href="join.jsp">회원가입</a>
+						<li><a href="login.jsp">로그인</a>
+						<li class="active"><a href="join.jsp">회원가입</a>
 					</ul>
 				</li>
 			</ul>
