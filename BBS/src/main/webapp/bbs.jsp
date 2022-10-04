@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="bbs.BbsDAO" %>
+<%@ page import="bbs.Bbs" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,12 @@
 			/* 로그인 한 사람일 경우 userID 변수에 해당 userID를 담아줌 */
 			userID = (String) session.getAttribute("userID");
 		}
-	
+		//기본페이지
+		int pageNumber = 1;
+		//만약 파라미터로 pageNumber가 넘어왔다면 
+		if(request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -94,12 +102,22 @@
 					</tr>
 				</thead>
 				<tbody>
+				<!-- 게시글 목록 출력 -->
+				<%
+					BbsDAO bbsDAO = new BbsDAO();
+					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+					for(int i = 0; i < list.size(); i++){
+				%>		
 					<tr>
-						<td>1</td>
-						<td>안녕하세요</td>
-						<td>홍길동</td>
-						<td>2022-09-29</td>
+						<td><%= list.get(i).getBbsID() %></td>
+						<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%= list.get(i).getBbsTitle() %></a></td>
+						<td><%= list.get(i).getUserID() %></td>
+						<td><%= list.get(i).getBbsDate().substring(0, 11) + list.get(i).getBbsDate().substring(11, 13) + "시" + list.get(i).getBbsDate().substring(14, 16) + "분" %></td>
 					</tr>
+				<%
+					}
+				%>
+				
 				</tbody>
 			</table>
 			<!-- btn-primary pull-right : 버튼 오른쪽 고정 -->
