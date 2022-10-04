@@ -13,8 +13,14 @@
 <meta name="viewport" content="width=divice-width", initial-scale="1">
 <!-- 참조(css) -->
 <link rel="stylesheet" href="css/bootstrap.css">
-
 <title>JSP 게시판 웹 사이트</title>
+<style type="text/css">
+	a, a:hover{
+		color: #000000;
+		text-decordration: none;
+	}
+
+</style>
 </head>
 <body>
 	<!-- 로그인 된 사람들은 로그인 정보를 담을 수 있도록 -->
