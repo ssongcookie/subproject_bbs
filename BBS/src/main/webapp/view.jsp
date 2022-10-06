@@ -112,11 +112,14 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 200px; text-align: left;"><%= bbs.getBbsContent() %></td>
+						<td colspan="2">
+							<!-- td태그 안에 div태그를 생성하여 style 속성을 줘야 더 안정적으로 적용됨 -->
+							<div class="bbs-content" style="min-height: 200px; text-align: left;">
+								<%= bbs.getBbsContent() %>						
+							</div>
+						</td>
 					</tr>
-					
 				</tbody>
-	
 			</table>
 			<a href="bbs.jsp" class="btn btn-primary">목록</a>	
 			<!-- 현재 접속한 유저가 본인이라면 수정할 수 있도록 -->	
@@ -125,11 +128,9 @@
 			%>
 				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">수정</a>
 				<a href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>
-				
 			<%
 				}
 			%>
-			
 			<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
 		</div>
 	</div>	
