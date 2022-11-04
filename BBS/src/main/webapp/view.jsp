@@ -94,13 +94,13 @@
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd" >
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 보기</th>
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글 보기</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td style="width: 20%;">글 제목</td>
-						<td colspan="2"><%= bbs.getBbsTitle() %></td>
+						<td colspan="2"><%= bbs.getBbsTitle().replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>")  %></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
@@ -115,7 +115,8 @@
 						<td colspan="2">
 							<!-- td태그 안에 div태그를 생성하여 style 속성을 줘야 더 안정적으로 적용됨 -->
 							<div class="bbs-content" style="min-height: 200px; text-align: left;">
-								<%= bbs.getBbsContent() %>						
+							<!-- 특수문자 치환 (보안상의 문제)  -->
+								<%= bbs.getBbsContent().replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br>") %>					
 							</div>
 						</td>
 					</tr>
